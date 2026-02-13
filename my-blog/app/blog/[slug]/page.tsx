@@ -1,4 +1,4 @@
-import { getPostBySlug, getAllPosts } from '@/lib/content';
+import { getContentBySlug, getAllPosts } from '@/lib/content';
 import { remark } from 'remark';
 import html from 'remark-html';
 
