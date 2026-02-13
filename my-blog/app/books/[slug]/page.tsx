@@ -31,4 +31,4 @@ export default async function Book({ params }: { params: { slug: string } }) {
       </article>
     </div>
   );
-}
+
