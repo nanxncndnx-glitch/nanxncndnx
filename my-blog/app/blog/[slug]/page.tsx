@@ -1,16 +1,16 @@
-import { getPostBySlug, getAllPosts } from '@/lib/posts';
+import { getPostBySlug, getAllPosts } from '@/lib/content';
 import { remark } from 'remark';
 import html from 'remark-html';
 
 export async function generateStaticParams() {
-  const posts = getAllPosts();
+  const posts = getContent('posts');
   return posts.map((post) => ({
     slug: post.slug,
   }));
 }
 
 export default async function Post({ params }: { params: { slug: string } }) {
-  const post = getPostBySlug(params.slug);
+  const post = getContentBySlug('posts', params.slug);
   const processedContent = await remark().use(html).process(post.content);
   const contentHtml = processedContent.toString();
 
