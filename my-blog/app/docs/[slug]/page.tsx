@@ -4,14 +4,21 @@ import html from 'remark-html';
 import Link from 'next/link';
 
 export async function generateStaticParams() {
-  const docs = getContent('docs');
-  return docs.map((doc) => ({
-    slug: doc.slug,
-  }));
+  try {
+    const docs = getContent('docs');
+    const validDocs = docs.filter(doc => doc && doc.slug);
+    return validDocs.map((doc) => ({
+      slug: doc.slug,
+    }));
+  } catch (error) {
+    console.error('Error generating static params for docs:', error);
+    return [];
+  }
 }
 
-export default async function Doc({ params }: { params: { slug: string } }) {
-  const doc = getContentBySlug('docs', params.slug);
+export default async function Doc({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;  // <-- AWAIT params here!
+  const doc = getContentBySlug('docs', slug);
   const processedContent = await remark().use(html).process(doc.content);
   const contentHtml = processedContent.toString();
 
