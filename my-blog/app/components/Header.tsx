@@ -6,7 +6,7 @@ export default function Header() {
       <nav className="max-w-6xl mx-auto px-8 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="hover:opacity-80 transition">
-            <img src="/logo.png" alt="nanxncndnx" className="h-8" />
+            <img src="/nanxncndnx/logo.png" alt="nanxncndnx" className="h-8" />
           </Link>
           
           <ul className="flex gap-8">
